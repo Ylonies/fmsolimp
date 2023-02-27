@@ -17,9 +17,11 @@ db_sess = db_session.create_session()
 app.config['SECRET_KEY'] = 'project_web'
 
 
-@app.context_processor
-def context_processor():
-    return dict(subjects=[sb.name for sb in db_sess.query(Subjects)], admins=[sb.author for sb in db_sess.query(Subjects)])
+# @app.context_processor
+# def context_processor():
+#     return dict(subjects=[sb.name for sb in db_sess.query(Subjects)], admins=[sb.author for sb in db_sess.query(Subjects)])
+admins = [1]
+subjects = ["Геометрия"]
 
 
 @app.route("/")
@@ -224,6 +226,6 @@ def logout():
     return redirect("/")
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.2')
+    app.run(host='127.0.0.0')
 
 
