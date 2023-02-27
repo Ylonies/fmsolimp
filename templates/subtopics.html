@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% include 'title.html' %}
+<section class="container">
+  <div class="accordion" id="accordionExample">
+  {%for sb in subtopics%}
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{sb.id}}" aria-expanded="false" aria-controls="collapse{{sb.id}}">
+        {{sb.name}}
+      </button>
+    </h2>
+    <div id="collapse{{sb.id}}" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-info">
+            <a href="/{{sb.id}}/theory" class="link-dark rounded">Теория</a>
+          </li>
+          {%for ex in sb.exercises %}
+          {% if ex.id in done_exercises%}
+          <li class="list-group-item list-group-item-success"><a href="/{{sb.id}}/exercise/{{ex.number}}" class="link-dark rounded">Задание {{ex.number}}</a></li>
+          {%else%}
+          <li class="list-group-item"><a href="/{{sb.id}}/exercise/{{ex.number}}" class="link-dark rounded">Задание {{ex.number}}</a></li>
+          {%endif%}
+
+          {%endfor%}
+          {% if current_user.id == sbj.author %}
+          <li class="list-group-item"><a href="/{{sb.id}}/edit_exercise/{{sb.exercises|length+1}}" class="link-dark rounded">+</a></li>
+          {%endif%}
+        </ul>
+      </div>
+
+    </div>
+  </div>
+  {%endfor%}
+  {% if current_user.id == sbj.author %}
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        +
+      </button>
+    </h2>
+    {% include 'addmodal.html' %}
+  </div>
+  {%endif%}
+</div>
+</section>
+<div class="fixed-bottom">
+  <a href="/{{sbj.name}}" class="btn btn-outline-secondary">Вернуться</a>
+</div>
+
+{% endblock %}

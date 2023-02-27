@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="py-5 text-center container">
+    <div class="row py-lg-1">
+      <div class="col-lg-5 col-md-8 mx-auto">
+        <h2 class="font-monospace">{{subject.name}}</h2>
+        <p class="lead text-muted">{{author.name}} {{author.surname}}</p>
+      </div>
+    </div>
+</section>
+<div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4" >
+        {% for topic in topics%}
+        <div class="card text-center" >
+          <div class="card-body">
+            <h5 class="card-title">{{topic.name}}</h5>
+          </div>
+          <a class="btn btn-outline-success" href="{{topic.name}}/subtopics">Продолжить</a>
+
+        </div>
+        {% endfor %}
+        {% if current_user.id  == author.id %}
+         <div class="card text-center" >
+          <div class="card-body">
+            <h5 class="lead text-muted">Добавить</h5>
+          </div>
+             <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                 +
+             </button>
+             <!-- Modal -->
+             {% include 'addmodal.html' %}
+        </div>
+          {% endif %}
+
+
+
+
+      </div>
+    </div>
+</div>
+{% endblock %}

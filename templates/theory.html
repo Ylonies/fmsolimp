@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% include 'title.html' %}
+    <div class="album py-5 bg-light">
+    <div class="card card-body">
+      <div >
+          {{theory.data |safe}}
+      </div>
+    </div>
+    </div>
+
+<div class="fixed-bottom">
+    <a href="/{{topic}}/subtopics" class="btn btn-outline-secondary">Вернуться</a>
+    {% if num >= 1 %}
+    <a href="/{{sb_id}}/exercise/1" class="btn btn-outline-secondary">Продолжить</a>
+    {% endif %}
+    {% if current_user.id == sbj.author %}
+    <a href="/{{sb_id}}/edit_theory" class="btn btn-outline-secondary">Редактировать</a>
+    {%endif%}
+</div>
+
+{% endblock %}

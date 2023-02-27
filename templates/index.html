@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<body class="d-flex h-100 text-center text-white bg-dark">
+<section class="py-5 text-center container">
+    <div class="row py-lg-1">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="font-weight-light">Fmsolimp</h1>
+        <p class="lead text-muted">Cайт для подготвки к олимпиадам школьников</p>
+      </div>
+    </div>
+    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="10000">
+      <img src="/static/img/carousel1.jpg">
+    </div>
+    <div class="carousel-item" data-bs-interval="10000">
+      <img src="/static/img/carousel2.jpg">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Предыдущий</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Следующий</span>
+  </button>
+</div>
+</section>
+
+</body>
+{% endblock %}

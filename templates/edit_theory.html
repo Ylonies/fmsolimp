@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% include 'title.html' %}
+
+        {% if current_user.id == sbj.author %}
+         <form method="post">
+             <textarea id="summernote" name="new_theory" value={{theory.data|safe}}></textarea>
+             <input type="submit" value="Добавить" />
+             <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+             <script>
+        $(document).ready(function() {
+        $('#summernote').summernote();
+    });
+</script>
+  </form>
+      {%endif%}
+<div class="fixed-bottom">
+ <a href="/{{topic}}/subtopics" class="btn btn-outline-secondary">Вернуться</a>
+ <a href="/{{title}}/exercise/1" class="btn btn-outline-secondary">Продолжить</a>
+</div>
+
+
+{% endblock %}

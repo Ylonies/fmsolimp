@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+
+.comment-widget__replies {
+    display: ;
+}
+
+</style>
+{% include 'title.html' %}
+
+<h6 class="border-bottom pb-2 mb-0">Вопросы</h6>
+            {% for ms in messages%}
+            {%  if ms.parent_id ==0 %}
+            <li class="list-group-item" >
+                <div class="d-flex pt-3 border-bottom">
+                    {% if ms.user_id == admin %}
+                    <img src="/static/img/security.png" width="32" height="32"/>
+                    {%endif%}
+                    <p class="pb-3 mb-0 small lh-sm ">
+                        <strong class="d-block text-gray-dark">{{ms.user.name}} {{ms.user.surname}}</strong>
+                        {{ms.text}}
+                    </p>
+                </div>
+                <small class="d-block text-end mt-3">
+                 <a class="btn-link" data-bs-toggle="collapse" data-bs-target=".multi-collapse" role="button" aria-expanded="false" aria-controls="collapse_answers{{ms.id}} collapse_input{{ms.id}}">
+                     Ответить
+                 </a>
+                 <a class="btn-link" data-bs-toggle="collapse" href="#collapse_answers{{ms.id}}" role="button" aria-expanded="false" aria-controls="collapse_answers{{ms.id}}">
+                     Ответы
+                 </a>
+                </small>
+                <div class="collapse multi-collapse" id="collapse_answers{{ms.id}}" >
+                        <ul class="comment_widget">
+                        {% for ms_2 in messages%}
+                        {% if ms_2.parent_id == ms.id %}
+                                 <div class="d-flex pt-3 border-bottom">
+                                     {% if ms_2.user_id == admin %}
+                                     <img src="/static/img/security.png" width="32" height="32"/>
+                                     {%endif%}
+                                     <p class="pb-3 mb-0 small lh-sm border-bottom">
+                                         <strong class="d-block text-gray-dark">{{ms_2.user.name}} {{ms_2.user.surname}}</strong>
+                                         {{ms_2.text}}
+                                     </p>
+                                 </div>
+                        {% endif %}
+                        {% endfor %}
+
+                            </ul>
+                </div>
+
+                            <div class="collapse multi-collapse" id="collapse_input{{ms.id}}">
+                            <form  action="" method="post">
+                                <input type="hidden" name="parent_id" value="{{ ms.id }}">
+                                <div class="input-group mb-3">
+                                <input type="text" class="form-control" name="message">
+                                <input type="submit" class="btn btn-outline-success" name="add_message" value="Отправить" />
+                                </div>
+                            </form>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+
+            </li>
+            {% endif %}
+            {% endfor %}
+
+
+
+<div class="fixed-bottom">
+    <div class="box">
+        <form action="" method="post">
+        <input type="hidden" name="parent_id" value="0">
+     <div class="input-group mb-3">
+         <input type="text" class="form-control" name="message" >
+         <input type="submit" class="btn btn-outline-success" name="add_message" value="Отправить" />
+     </div>
+    </form>
+    </div>
+
+    <a href="/{{exercise.subtopics_id}}/exercise/{{exercise.number}}" class="btn btn-outline-secondary">Вернуться</a>
+
+</div>
+
+{% endblock %}

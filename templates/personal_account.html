@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+{% include 'title.html' %}
+<style>
+
+</style>
+<div class="box">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Имя: {{current_user.name}}</li>
+        <li class="list-group-item">Фамилия: {{current_user.surname}}</li>
+        <li class="list-group-item"> Почта: {{current_user.email}} </li>
+<!--        <li class="list-group-item">-->
+<!--            <a class="btn-outline-secondary"> Изменить пароль </a>-->
+<!--        </li>-->
+        <li class="list-group-item">
+            <a class="btn-outline-secondary" href="/logout"> Выйти </a>
+        </li>
+    </ul>
+</div>
+
+{% endblock %}
+

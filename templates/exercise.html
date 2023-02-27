@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+{% include 'title.html' %}
+<div class="box">
+    <h6>Условие</h6>
+
+    <div class="card card-body">{{exercise.text|safe}}</div>
+    {% if exercise.answer %}
+    <h6>Ответ</h6>
+     <form action="" method="post">
+        {{ form.hidden_tag() }}
+             <div class="input-group mb-3">
+                 {{ form.answer(class="form-control")}}
+                 {{ form.submit(type="submit", class="btn btn-outline-success") }}
+             </div>
+            {% for error in form.answer.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endfor %}
+         {% if message %}
+         <div class="alert alert-success" role="alert">
+             {{message}}
+         </div>
+         {% endif %}
+     </form>
+    {% endif %}
+        {% if exercise.solution %}
+        <a class="btn btn-link" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Посмотреть решение
+        </a>
+    <div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    {{ exercise.solution |safe }}
+  </div>
+</div>
+    {% endif %}
+
+
+</div>
+
+
+
+
+<div class="fixed-bottom">
+    <a href="/{{topic}}/subtopics" class="btn btn-outline-secondary">Вернуться</a>
+    {%if exercise.number < num%}
+    <a href="/{{sb_id}}/exercise/{{exercise.number + 1}}" class="btn btn-outline-secondary">Продолжить</a>
+    {%endif%}
+    {% if current_user.id == author %}
+    <a href="/{{sb_id}}/edit_exercise/{{exercise.number}}" class="btn btn-outline-secondary">Редактировать</a>
+    {% endif %}
+    <a href="/forum/{{exercise.id}}" class="btn btn-outline-secondary">Вопросы</a>
+</div>
+
+
+{% endblock %}
